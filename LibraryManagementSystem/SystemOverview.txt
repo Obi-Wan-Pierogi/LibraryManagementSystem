@@ -1,0 +1,88 @@
+1. Database Connection Class
+Purpose: Manages all database interactions, abstracting the details of connecting, querying, and disconnecting from the database.
+
+Design Rationale: Centralizes all database operations to avoid redundancy and make maintenance easier.
+
+Adaptability: Facilitates changes in the database layer without affecting other parts of the system.
+
+Modularity/Reusability: Highly reusable for any operation requiring database interaction.
+
+2. User Class and Subclasses (Student, Faculty, Librarian)
+Purpose: Represents different types of users in the system. The base User class encapsulates common attributes and functionalities, while subclasses extend specific behaviors for different user types.
+
+Design Rationale: Implements inheritance to reduce code duplication and increase clarity by separating common and specific user functionalities.
+
+Adaptability: New user types can be easily added as subclasses without altering existing logic.
+
+Modularity/Reusability: The base User class is reusable and extensible, promoting consistency across different user types.
+
+3. Resource Class and Book Subclass
+Purpose: Manages library resources. Resource is a generic class for all resources, and Book is an example of a specific implementation for book-type resources. This can be extended to other formats as needed.
+
+Design Rationale: Similar to users, this setup uses inheritance to separate general resource attributes from format-specific ones.
+
+Adaptability: New types of resources can be added as new subclasses. Changes to resource properties require updates only in the Resource class.
+
+Modularity/Reusability: The Resource class is modular and can be extended for different resource types.
+
+4. Transaction Class
+Purpose: Handles the transactions of resources, such as issuing and returning items.
+
+Design Rationale: Centralizes the transaction management, making tracking and handling of resource lending and returns more manageable.
+
+Adaptability: Can be updated to accommodate new transaction types or changes in transaction rules.
+
+Modularity/Reusability: Specific to transaction handling, this class can be used wherever transaction data needs to be processed.
+
+5. Library Management Class
+Purpose: Acts as the central controller of the library system, orchestrating various operations like user and transaction management.
+
+Design Rationale: Provides a unified interface for the system's functionalities, simplifying interactions between different components.
+
+Adaptability: New features and functionalities can be integrated into this class without impacting the underlying classes.
+
+Modularity/Reusability: Serves as a modular point of interaction for various system components, though it's tailored more towards integration than reuse.
+
+6. ResourceManager Class
+Purpose: Specifically manages library resources, handling operations like adding, updating, and deleting resources.
+
+Design Rationale: Isolates resource management, reducing complexity in other parts of the system.
+
+Adaptability: Can easily adapt to changes in resource management policies or addition of new resource types.
+
+Modularity/Reusability: This class is a modular and reusable component for resource-related operations.
+
+System Overview 
+1. Modularity and Separation of Concerns:
+
+The system is designed with distinct modules for user management, resource management, transaction processing, and database interactions. This separation allows for focused development and easier maintenance within each module.
+
+Trade-off: While this design enhances maintainability, it may introduce complexity in terms of the interactions between different modules. Coordinating changes across modules requires careful planning to ensure system integrity.
+
+2. Use of Inheritance and Abstraction:
+
+Classes like User and Resource use inheritance to define shared properties and behaviors, while allowing for specialization in subclasses. This abstraction simplifies the representation of real-world entities.
+
+Trade-off: This approach is beneficial for reusability and extendibility but can lead to deeper inheritance hierarchies, which may complicate understanding and debugging. Overuse of inheritance can also lead to rigid designs, making it hard to change base classes without affecting all subclasses.
+
+Centralized Management Classes:
+
+Classes like LibraryManagement and ResourceManager serve as centralized points for operations, providing a cohesive interface for various functionalities.
+
+Trade-off: While centralization simplifies the interaction pattern, it can lead to a scenario where these classes become too large and unwieldy, hindering scalability and manageability.
+
+Implications for Future Changes
+
+Scalability and New Features Integration:
+
+The modular design facilitates the addition of new features or scaling specific functionalities. For instance, introducing a new user type or a new resource category can be done by adding a new subclass or modifying an existing module without overhauling the entire system.
+
+Maintenance and Upgrades:
+
+Maintenance is simplified due to the separation of concerns; updates or bug fixes in one module are less likely to impact other areas of the system.
+Future upgrades may require refactoring if certain base classes or central management classes become bloated or if the system's requirements change significantly.
+
+Adaptability to Technological Changes:
+
+The system's design with abstract classes and interfaces allows it to be more adaptable to changes in technology. For example, if the database technology changes, only the DatabaseConnection class needs to be updated.
+
